@@ -11,18 +11,32 @@ body {
 }
 
 header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
     background-color: #000000;
     padding: 10px;
     color: #ffffff;
 }
 
 header h1 {
-    text-align: center;
     font-size: 3rem;
+    margin: 0;
+    text-align: center;
+}
+
+header nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 header nav a {
-    margin-right: 40%;
     color: #ffffff;
     text-decoration: none;
 }
@@ -38,15 +52,48 @@ section {
     margin: 10px;
 }
 
+.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
 .card {
     padding: 16px;
     border-left: 4px solid black;
     margin-bottom: 10px;
 }
 
-.card img {
-    max-width: 100%;
+@media (min-width: 600px) {
+    .cards { 
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
+
+@media (min-width: 1024px) {
+    header {
+        flex-direction: row; 
+        justify-content: space-between;
+    }
+
+    header nav {
+        flex-direction: row;
+        gap: 40px; 
+    }
+
+    .cards { 
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .double_display {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+}
+
+img { max-width: 100%; height: auto; };
 
 aside {
     border: 1px solid black;
