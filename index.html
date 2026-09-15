@@ -5,40 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Афіша подій міста</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Шрифти -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:CRSV@0&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>Афіша подій міста</h1>
         <nav>
-            <a href="#events">Події</a>
-            <a href="#current_event">Обрана подія</a>
+            <a href="#events" class="events">Події</a>
+            <a href="#current_event" class="current_event">Обрана подія</a>
         </nav>
     </header>
 
 <section class="double_display">
 
     <main>
-        <section>
-            <h2>Фільтр за датою/категорією</h2>
+        <section class="filter">
+            <img src="assets/filter_alt_24dp_FFC145_FILL0_wght400_GRAD0_opsz24.svg" alt="Фільтр">
+            <h2>Події</h2>
         </section>
         <section>
-            <h2>Події</h2>
             <section class="cards">
                 <article class="card">
                     <img src="assets/img/The Odyssey.webp" alt="Одісея">
-                    <h3>Подія 1</h3>
+                    <h3>Одісея</h3>
+                    <div class="badges">
+                        <time class="date" datetime="2026-07-17">
+                            <span class="month">Лип</span>
+                            <span class="day">17</span>
+                        </time>
+                        <span class="badge">Кіно</span>
+                    </div>
                 </article>
                 <article class="card">
-                    <img src="assets/img/The Odyssey.webp" alt="Одісея">
-                    <h3>Подія 2</h3>
+                    <img src="assets/img/Kuzma.webp" alt="Кузьма Скрябін">
+                    <h3>Кузьма Скрябін</h3>
+                    <div class="badges">
+                        <time class="date" datetime="2026-09-15">
+                            <span class="month">Вер</span>
+                            <span class="day">15</span>
+                        </time>
+                        <span class="badge">Концерт</span>
+                    </div>
                 </article>
                 <article class="card">
-                    <img src="assets/img/The Odyssey.webp" alt="Одісея">
-                    <h3>Подія 3</h3>
+                    <img src="assets/img/StandUp.webp" alt="Смішна сімка">
+                    <h3>Смішна сімка</h3>
+                    <div class="badges">
+                        <time class="date" datetime="2026-09-15">
+                            <span class="month">Вер</span>
+                            <span class="day">15</span>
+                        </time>
+                        <span class="badge">Стендап</span>
+                    </div>
                 </article>
                 <article class="card">
-                    <img src="assets/img/The Odyssey.webp" alt="Одісея">
-                    <h3>Подія 4</h3>
+                    <img src="assets/img/Circus.webp" alt="Цирк">
+                    <h3>Промінь</h3>
+                    <div class="badges">
+                        <time class="date" datetime="2026-09-20">
+                            <span class="month">Вер</span>
+                            <span class="day">20</span>
+                        </time>
+                        <span class="badge">Шоу</span>
+                    </div>
                 </article>
             </section>
         </section>

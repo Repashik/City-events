@@ -8,6 +8,39 @@ body {
     font-family: system-ui, sans-serif;
     line-height: 1.5;
     color: #000000;
+    background-color: #FFFFFB;
+}
+
+h1, h2, h3 {
+    font-family: "Huninn", sans-serif;
+}
+
+p, a {
+    font-family: "Geologica", sans-serif;
+}
+
+h1, h2, h3, p {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 header {
@@ -17,28 +50,33 @@ header {
     gap: 20px;
     flex-wrap: wrap;
 
-    background-color: #000000;
+    background-color: #5b5f97;
     padding: 10px;
-    color: #ffffff;
+    color: #fffffb;
+
+    h1 {
+        font-size: 3rem;
+        margin: 0;
+        text-align: center;
+        font-family: "Huninn", sans-serif;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+
+        a {
+            color: #ffc145;
+            text-decoration: none;
+        }
+    }
 }
 
-header h1 {
-    font-size: 3rem;
-    margin: 0;
-    text-align: center;
-}
-
-header nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-header nav a {
-    color: #ffffff;
-    text-decoration: none;
+.events {
+    text-decoration: underline;
 }
 
 main {
@@ -46,6 +84,24 @@ main {
     margin: auto;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.filter {
+    margin-left: -10%;
+    display: flex;
+
+    img {
+        width: 3em;
+        height: 3em;
+        
+        img:hover{
+            cursor: pointer;
+        }
+    }
+
+    h2 {
+        margin: 0 auto;
+    }
 }
 
 section {
@@ -56,17 +112,85 @@ section {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
+
+    .card {
+        display: flex;
+        padding: 16px;
+        border-left: 4px solid black;
+        flex-direction: column;
+        height: 100%;
+
+        .badges{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: auto;
+
+            .date {
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+    
+                width: 2.5rem;
+                min-width: 2.5rem;
+                border-radius: 8px;
+                overflow: hidden;
+                text-align: center;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                background-color: #ffffff;
+    
+                .month {
+                    width: 100%;
+                    background-color: #5b5f97;
+                    color: #ffffff;
+                    font-size: 0.75rem;
+                    font-weight: 650;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    padding: 2px 0;
+                }
+        
+                .day {
+                    color: #1a1a1a;
+                    font-size: 1rem;
+                    font-weight: 800;
+                    line-height: 1;
+                    padding: 4px 0 4px;
+                }
+            }
+
+            .badge {
+                font-family: "Geologica", sans-serif;
+                text-align: center;
+                color: #000000;
+                background-color: #b8b8d1;
+                padding: 10px 20px;
+                border-radius: 30px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+
+    .card:hover {
+        cursor: pointer;
+    }
 }
 
-.card {
+aside {
+    background-color: #b8b8d1;
     padding: 16px;
-    border-left: 4px solid black;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 @media (min-width: 600px) {
     .cards { 
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter {
+        margin-left: -6%;
     }
 }
 
@@ -74,11 +198,11 @@ section {
     header {
         flex-direction: row; 
         justify-content: space-between;
-    }
 
-    header nav {
-        flex-direction: row;
-        gap: 40px; 
+        nav {
+            flex-direction: row;
+            gap: 40px; 
+        }
     }
 
     .cards { 
@@ -91,19 +215,27 @@ section {
         gap: 20px;
         align-items: start;
     }
+
+    aside {
+        margin-top: 83px;
+        margin-right: -10px;
+        border-radius: 10px 0px 0px 10px;
+    }
+
+    .filter {
+        margin-left: -5%;
+    }
 }
 
-img { max-width: 100%; height: auto; };
-
-aside {
-    border: 1px solid black;
-    padding: 16px;
-    margin-bottom: 10px;
-    background-color: #979191;
+img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 10px;
 }
 
 footer {
     font-size: small;
     padding: 10px;
     color: rgb(39, 39, 38);
+    background-color: #b8b8d1;
 }
