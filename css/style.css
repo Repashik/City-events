@@ -81,9 +81,9 @@ header {
 
 main {
     max-width: 90%;
-    margin: auto;
     padding-left: 10px;
     padding-right: 10px;
+    margin-left: 30px;
 }
 
 .filter {
@@ -93,10 +93,7 @@ main {
     img {
         width: 3em;
         height: 3em;
-        
-        img:hover{
-            cursor: pointer;
-        }
+        cursor: pointer;
     }
 
     h2 {
@@ -119,6 +116,7 @@ section {
         border-left: 4px solid black;
         flex-direction: column;
         height: 100%;
+        cursor: pointer;
 
         .badges{
             display: flex;
@@ -166,14 +164,11 @@ section {
                 color: #000000;
                 background-color: #b8b8d1;
                 padding: 10px 20px;
+                margin: 0px;
                 border-radius: 30px;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             }
         }
-    }
-
-    .card:hover {
-        cursor: pointer;
     }
 }
 
@@ -185,6 +180,10 @@ aside {
 }
 
 @media (min-width: 600px) {
+    main {
+        margin-left: 40px;
+    }
+
     .cards { 
         grid-template-columns: repeat(2, 1fr);
     }
@@ -203,6 +202,10 @@ aside {
             flex-direction: row;
             gap: 40px; 
         }
+    }
+
+    main {
+        margin-left: 50px;
     }
 
     .cards { 

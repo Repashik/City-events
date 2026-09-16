@@ -1,5 +1,5 @@
 // Підтверджує, що javascript підключено
-console.log('script.js підключено')
+console.log('script.js підключено');
 
 // Масив подій
 const events = [
@@ -8,6 +8,59 @@ const events = [
     { title: "Смішна сімка", category: "Стендап" },
     { title: "Промінь", category: "Шоу" }
 ]
+
+// Вибираємо список карт
+const listContainer = document.querySelector('#events-list');
+
+// Функція рендеру
+function renderEvents(events) {
+    // Очищаємо внутрощі списку та створюємо лічильник
+    listContainer.innerHTML = '';
+    let eventsCount = 0;
+
+    // Циклом проходимся по подіям 
+    events.forEach(event => {
+        // Стоврюємо HTML-теги
+        const card = document.createElement('article');
+        const title = document.createElement('h3');
+        const category = document.createElement('p');
+
+        // Пишемо потрібний текст
+        title.textContent = event.title;
+        category.textContent = event.category;
+
+        // Додаємо теги в тег card
+        card.append(title);
+        card.append(category);
+
+        // Додаємо класи картці
+        card.classList.add('card');
+        card.dataset.category = event.category; 
+        if (event.category === "Кіно") {
+            card.classList.add('movie');
+        } else if (event.category === "Концерт") {
+            card.classList.add('concert');
+        } else if (event.category === "Стендап") {
+            card.classList.add('standup');
+        } else if (event.category === "Шоу") {
+            card.classList.add('show');
+        }
+        else {
+            card.classList.add('other');
+        }
+
+        // Додаємо катру в список карт і збільшуємо лічильник
+        listContainer.append(card);
+        eventsCount++;
+    });
+
+    // Пишемо потрібне число в тег лічильника
+    const pContainer = document.querySelector('#events-count');
+    pContainer.textContent = 'Кількість подій: ' + eventsCount;
+}
+
+// Викликаємо функцію рендеру
+renderEvents(events);
 
 // Цикл, що перебирає масив подій та класифікує їх по категоріям
 for (let i = 0; i < events.length; i++) {
