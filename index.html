@@ -25,11 +25,49 @@
 <section class="double_display">
 
     <main>
-        <section class="filter">
+        <section class="underheader">
             <img src="assets/filter_alt_24dp_FFC145_FILL0_wght400_GRAD0_opsz24.svg" alt="Фільтр">
             <h2>Події</h2>
         </section>
-        <section>
+        <form id="event-form">
+          <label for="event-title">Назва події:</label>
+          <input 
+            type="text" 
+            id="event-title" 
+            name="title" 
+            pattern=".{3,}" 
+            required
+          >
+        
+          <label for="event-category">Категорія:</label>
+          <select id="event-category" name="category" required>
+            <option value="other">Оберіть категорію</option>
+            <option value="movie">Кіно</option>
+            <option value="concert">Концерт</option>
+            <option value="standup">Стендап</option>
+            <option value="show">Шоу</option>
+          </select>
+      
+          <label for="event-date">Дата події:</label>
+          <input 
+            type="date" 
+            id="event-date" 
+            name="date" 
+            required
+          >
+      
+          <button type="submit">Додати подію</button>
+        </form>
+        <section class="filter-and-cards">
+
+            <div class="filter-buttons" id="filter-buttons">
+                <button type="button" data-category="movie">Кіно</button>
+                <button type="button" data-category="concert">Концерт</button>
+                <button type="button" data-category="standup">Стендап</button>
+                <button type="button" data-category="show">Шоу</button>
+                <button type="button" data-category="other">Інше</button>
+            </div>
+            
             <section class="cards" id="events-list">
                 <article class="card">
                     <img src="assets/img/The Odyssey.webp" alt="Одіссея">
@@ -59,24 +97,25 @@
                     <div class="badges">
                         <time class="date" datetime="2026-09-15">
                             <span class="month">Вер</span>
-                            <span class="day">15</span>
-                        </time>
-                        <span class="badge">Стендап</span>
-                    </div>
-                </article>
-                <article class="card">
-                    <img src="assets/img/Circus.webp" alt="Цирк">
-                    <h3>Промінь</h3>
-                    <div class="badges">
-                        <time class="date" datetime="2026-09-20">
-                            <span class="month">Вер</span>
-                            <span class="day">20</span>
-                        </time>
-                        <span class="badge">Шоу</span>
-                    </div>
-                </article> -->
-            </section>
+                        <span class="day">15</span>
+                    </time>
+                    <span class="badge">Стендап</span>
+                </div>
+            </article>
+            <article class="card">
+                <img src="assets/img/Circus.webp" alt="Цирк">
+                <h3>Промінь</h3>
+                <div class="badges">
+                    <time class="date" datetime="2026-09-20">
+                        <span class="month">Вер</span>
+                        <span class="day">20</span>
+                    </time>
+                    <span class="badge">Шоу</span>
+                </div>
+            </article> -->
         </section>
+
+    </section>
     </main>
     
     <aside>

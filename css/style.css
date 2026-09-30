@@ -86,7 +86,7 @@ main {
     margin-left: 30px;
 }
 
-.filter {
+.underheader {
     margin-left: -10%;
     display: flex;
 
@@ -99,6 +99,22 @@ main {
     h2 {
         margin: 0 auto;
     }
+}
+
+form {
+    margin-left: 5%;
+}
+
+.filter-and-cards {
+    display: flex;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-left: -6%;
 }
 
 section {
@@ -188,7 +204,7 @@ aside {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .filter {
+    .underheader {
         margin-left: -6%;
     }
 }
@@ -225,7 +241,7 @@ aside {
         border-radius: 10px 0px 0px 10px;
     }
 
-    .filter {
+    .underheader {
         margin-left: -5%;
     }
 }
