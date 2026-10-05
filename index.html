@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Афіша подій міста</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js" defer></script>
+    <!-- <script src="js/app.js" defer></script> -->
 
     <!-- Шрифти -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geologica:CRSV@0&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
@@ -21,45 +22,45 @@
             <a href="#current_event" class="current_event">Обрана подія</a>
         </nav>
     </header>
-
-<section class="double_display">
-
-    <main>
-        <section class="underheader">
-            <img src="assets/filter_alt_24dp_FFC145_FILL0_wght400_GRAD0_opsz24.svg" alt="Фільтр">
-            <h2>Події</h2>
-        </section>
-        <form id="event-form">
-          <label for="event-title">Назва події:</label>
-          <input 
-            type="text" 
-            id="event-title" 
-            name="title" 
-            pattern=".{3,}" 
-            required
-          >
+    
+    <section class="double_display">
         
-          <label for="event-category">Категорія:</label>
-          <select id="event-category" name="category" required>
-            <option value="other">Оберіть категорію</option>
-            <option value="movie">Кіно</option>
-            <option value="concert">Концерт</option>
-            <option value="standup">Стендап</option>
-            <option value="show">Шоу</option>
-          </select>
-      
-          <label for="event-date">Дата події:</label>
-          <input 
-            type="date" 
-            id="event-date" 
-            name="date" 
-            required
-          >
-      
-          <button type="submit">Додати подію</button>
-        </form>
+        <main>
+            <section class="underheader">
+                <img src="assets/filter_alt_24dp_FFC145_FILL0_wght400_GRAD0_opsz24.svg" alt="Фільтр">
+                <h2>Події</h2>
+            </section>
+            <form id="event-form">
+                <label for="event-title">Назва події:</label>
+                <input 
+                type="text" 
+                id="event-title" 
+                name="title" 
+                pattern=".{3,}" 
+                required
+                >
+                
+                <label for="event-category">Категорія:</label>
+                <select id="event-category" name="category" required>
+                    <option value="other">Оберіть категорію</option>
+                    <option value="movie">Кіно</option>
+                    <option value="concert">Концерт</option>
+                    <option value="standup">Стендап</option>
+                    <option value="show">Шоу</option>
+                </select>
+                
+                <label for="event-date">Дата події:</label>
+                <input 
+                type="date" 
+                id="event-date" 
+                name="date" 
+                required
+                >
+                
+                <button type="submit">Додати подію</button>
+            </form>
         <section class="filter-and-cards">
-
+            
             <div class="filter-buttons" id="filter-buttons">
                 <button type="button" data-category="movie">Кіно</button>
                 <button type="button" data-category="concert">Концерт</button>
@@ -69,7 +70,7 @@
             </div>
             
             <section class="cards" id="events-list">
-                <article class="card">
+                <!-- <article class="card">
                     <img src="assets/img/The Odyssey.webp" alt="Одіссея">
                     <h3>Одіссея</h3>
                     <div class="badges">
@@ -79,43 +80,10 @@
                         </time>
                         <p class="badge">Кіно</p>
                     </div>
-                </article>
-                <!-- <article class="card">
-                    <img src="assets/img/Kuzma.webp" alt="Кузьма Скрябін">
-                    <h3>Кузьма Скрябін</h3>
-                    <div class="badges">
-                        <time class="date" datetime="2026-09-15">
-                            <span class="month">Вер</span>
-                            <span class="day">15</span>
-                        </time>
-                        <span class="badge">Концерт</span>
-                    </div>
-                </article>
-                <article class="card">
-                    <img src="assets/img/StandUp.webp" alt="Смішна сімка">
-                    <h3>Смішна сімка</h3>
-                    <div class="badges">
-                        <time class="date" datetime="2026-09-15">
-                            <span class="month">Вер</span>
-                        <span class="day">15</span>
-                    </time>
-                    <span class="badge">Стендап</span>
-                </div>
-            </article>
-            <article class="card">
-                <img src="assets/img/Circus.webp" alt="Цирк">
-                <h3>Промінь</h3>
-                <div class="badges">
-                    <time class="date" datetime="2026-09-20">
-                        <span class="month">Вер</span>
-                        <span class="day">20</span>
-                    </time>
-                    <span class="badge">Шоу</span>
-                </div>
-            </article> -->
+                </article> -->
+            </section>
+            
         </section>
-
-    </section>
     </main>
     
     <aside>
@@ -128,11 +96,18 @@
     
 </section>
 
-    <footer>
-        <p id="events-count">Кількість подій: 0</p>
-        <h2>Контакти організаторів</h2>
-        <p>Номер телефону:</p>
-        <p>Пошта:</p>
-    </footer>
+<footer>
+    <p id="events-count">Кількість подій: 0</p>
+    <h2>Контакти організаторів</h2>
+    <p>Номер телефону:</p>
+    <p>Пошта:</p>
+</footer>
+
+<!-- React 18 + Babel standalone для JSX прямо в браузері -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel" src="js/app.js"></script>
 </body>
 </html>
