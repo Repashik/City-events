@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Афіша подій міста</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- <script src="js/app.js" defer></script> -->
+    <script src="js/app.js" defer></script>
 
     <!-- Шрифти -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,8 +18,8 @@
     <header>
         <h1>Афіша подій міста</h1>
         <nav>
-            <a href="#events" class="events">Події</a>
-            <a href="#current_event" class="current_event">Обрана подія</a>
+            <button class="all_events" id="all-events-btn">Події</button>
+            <button class="current_event" id="saved-event-btn">Обрана подія</button>
         </nav>
     </header>
     
@@ -104,9 +104,9 @@
 </footer>
 
 <!-- React 18 + Babel standalone для JSX прямо в браузері -->
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
 
 <script type="text/babel" src="js/app.js"></script>
 </body>
