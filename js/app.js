@@ -148,6 +148,7 @@ function renderEvents(events) {
 
     // events = events.concat(getAllItems());
 
+    events.sort((a, b) => { return calculateDaysLeft(a.date) - calculateDaysLeft(b.date); });
     // Циклом проходимся по подіям 
     events.forEach(event => {
         // Стоврюємо HTML-теги
@@ -177,6 +178,7 @@ function renderEvents(events) {
 
         let displayDay = "??";
         let displayMonth = "???";
+        let daysLeft = 0; // Оголошуємо заздалегідь
 
         // Якщо дата існує, розбираємо її
         if (event.date) {
@@ -185,7 +187,14 @@ function renderEvents(events) {
 
             displayDay = dateObj.getDate();
             displayMonth = monthNames[dateObj.getMonth()];
+            
+            // Розраховуємо дні одразу тут, поки dateObj існує
+            const today = new Date();
+            const timeDiff = dateObj - today;
+            daysLeft = Math.abs(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) % 365);
         }
+        // Розраховуємо ширину смуги у відсотках
+        let progressPercent = Math.min((daysLeft / 365) * 100, 100);
 
         let status = "?";
         if (savedEvents.some(saved => String(saved.id) === String(event.id))) {
@@ -193,9 +202,9 @@ function renderEvents(events) {
         } else {
             status = "В обране";
         }
+
         // Підставляємо нові змінні у відповідні теги span
         card.innerHTML = `
-            <img src="<!-- assets/img/The Odyssey.webp -->" alt="${event.title}">
             <h3>${event.title}</h3>
             <div class="badges">
                 <time class="date" datetime="${event.date}">
@@ -205,16 +214,37 @@ function renderEvents(events) {
                 <p class="badge">${categoryText}</p>
                 <button class="btn-fav" data-id="${event.id}">${status}</button>
             </div>
+            <div class="progress-bar">
+                <div class="progress-bar_fill" style="width: 0%;"></div>
+            </div>
+            <p class="days-text">Днів до події: ${daysLeft > 0 ? daysLeft : 0}</p>
         `;
 
         // Додаємо катру в список карт і збільшуємо лічильник
         listContainer.append(card);
         eventsCount++;
+
+        const fill = card.querySelector('.progress-bar_fill');
+        if (fill) {
+            setTimeout(() => {
+                fill.style.width = `${progressPercent}%`;
+            }, 50);
+        }
     });
 
     // Пишемо потрібне число в тег лічильника
     const pContainer = document.querySelector('#events-count');
     pContainer.textContent = 'Кількість подій: ' + eventsCount;
+}
+
+function calculateDaysLeft(dateString) {
+    if (!dateString) return Infinity;
+    
+    const today = new Date();
+    const dateObj = new Date(dateString);
+    const timeDiff = dateObj - today;
+    
+    return Math.abs(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) % 365);
 }
 
 // === В обране ===

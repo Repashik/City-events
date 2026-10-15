@@ -121,6 +121,24 @@ section {
     margin: 10px;
 }
 
+
+@keyframes fadeInCard {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.progress-bar_fill {
+    height: 100%;
+    background: #2f7d32;
+    transition: width 0.6s ease; 
+}
+
 .cards {
     display: grid;
     grid-template-columns: 1fr;
@@ -132,20 +150,19 @@ section {
         border-left: 4px solid black;
         flex-direction: column;
         height: 100%;
-        cursor: pointer;
-
+        
         .badges{
             display: flex;
             gap: 20px;
             align-items: center;
             margin-top: auto;
-
+            
             .date {
                 display: inline-flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-    
+                
                 width: 2.5rem;
                 min-width: 2.5rem;
                 border-radius: 8px;
@@ -153,7 +170,7 @@ section {
                 text-align: center;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                 background-color: #ffffff;
-    
+                
                 .month {
                     width: 100%;
                     background-color: #5b5f97;
@@ -164,7 +181,7 @@ section {
                     letter-spacing: 0.05em;
                     padding: 2px 0;
                 }
-        
+                
                 .day {
                     color: #1a1a1a;
                     font-size: 1rem;
@@ -173,7 +190,7 @@ section {
                     padding: 4px 0 4px;
                 }
             }
-
+            
             .badge {
                 font-family: "Geologica", sans-serif;
                 text-align: center;
@@ -184,7 +201,30 @@ section {
                 border-radius: 30px;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             }
+            
+            .btn-fav {
+                font-family: "Geologica", sans-serif;
+                text-align: center;
+                color: #000000;
+                background-color: #b8b8d1;
+                padding: 10px 20px;
+                margin: 0px;
+                border-radius: 30px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                cursor: pointer;
+            }
         }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        /* Анімація застосовується автоматично */
+        animation: fadeInCard 0.6s ease-out forwards;
     }
 }
 
