@@ -4,7 +4,7 @@
 console.log('script.js підключено');
 
 // Адреса, з якої ми беремо дані
-const API_URL = 'https://date.nager.at/api/v3/PublicHolidays/2026/UA';
+const API_URL = 'http://localhost:3000/api/events';
 
 /**
  * Модель даних події:
@@ -278,18 +278,21 @@ async function loadData() {
         events.length = 0; // Стираємо фіктивні дані з минулих практикумів
         
         // Парсинг даних
-        data.forEach((event, index) => {
-            // Створюємо подію
-            const newEvent = {
-                id: `${event.date}-${index}`, 
-                date: event.date,
-                title: event.localName,
-                countryCode: event.countryCode, 
-                category: 'other'
-            };
-            // Додаємо подію
-            events.push(newEvent); 
+        data.forEach(event => {
+            events.push(event); 
         });
+        // data.forEach((event, index) => {
+        //     // Створюємо подію
+        //     const newEvent = {
+        //         id: `${event.date}-${index}`, 
+        //         date: event.date,
+        //         title: event.localName,
+        //         countryCode: event.countryCode, 
+        //         category: 'other'
+        //     };
+        //     // Додаємо подію
+        //     events.push(newEvent); 
+        // });
 
         // Додаємо з БД у загальний список лише ті події, яких немає в API
         const dbEvents = await getAllItems(); 
