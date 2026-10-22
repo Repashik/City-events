@@ -6,117 +6,6 @@ console.log('script.js підключено');
 // Адреса, з якої ми беремо дані
 const API_URL = 'https://date.nager.at/api/v3/PublicHolidays/2026/UA';
 
-// === Початок React частини ===
-
-// Створення компоненту списку
-// function EventCard({ title, category, date }) {
-//     // Вибір категорії події 
-//     const categoryNames = {
-//         movie: 'Кіно',
-//         concert: 'Концерт',
-//         standup: 'Стендап',
-//         show: 'Шоу',
-//         other: 'Інше'
-//     };
-//     const categoryText = categoryNames[category] || 'Інше';
-    
-//     // Парсинг дати
-//     const monthNames = ['Січ', 'Лют', 'Бер', 'Кві', 'Тра', 'Чер', 'Лип', 'Сер', 'Вер', 'Жов', 'Лис', 'Гру'];
-//     const dateObj = new Date(date);
-//     const displayDay = dateObj.getDate();
-//     const displayMonth = monthNames[dateObj.getMonth()];
-    
-//     // Розрахунок кількості днів до події
-//     const today = new Date();
-//     const diffTime = dateObj - today;
-//     const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-//     let daysText = '';
-//     if (daysLeft > 0) {
-//         daysText = `Залишилося днів: ${daysLeft}`;
-//     } else if (daysLeft === 0) {
-//         daysText = 'Подія відбувається сьогодні!';
-//     } else {
-//         daysText = `Подія відбулася ${Math.abs(daysLeft)} дн. тому`;
-//     }
-    
-//     return (
-//         <article className={'card'}>
-//             <img src="assets/img/The Odyssey.webp" alt={title} />
-//             <h3>{title}</h3>
-//             <div className="badges">
-//                 <time className="date" dateTime={date}>
-//                     <span className="month">{displayMonth}</span>
-//                     <span className="day">{displayDay}</span>
-//                 </time>
-//                 <p className="badge">{categoryText}</p>
-//             </div>
-//             <p className="days-left">{daysText}</p>
-//         </article>
-//     );
-// }
-
-// Головна функція
-// function App() {
-//     // Переведення в реактивний стан 
-//     const [events, setEvents] = React.useState([]);
-//     const [isLoading, setIsLoading] = React.useState(true);
-//     const [error, setError] = React.useState(null);
-    
-//     // Опис зміни стану 
-//     React.useEffect(() => {
-//         async function loadData() {
-//             try {
-//                 const response = await fetch(API_URL);
-//                 if (!response.ok) throw new Error('Дані про події не знайдено');
-//                 const data = await response.json();
-                
-//                 const formattedEvents = data.map((event, index) => ({
-//                     id: crypto.randomUUID(),
-//                     title: event.localName,
-//                     category: 'other',
-//                     date: event.date
-//                 }));
-                
-//                 setEvents(formattedEvents);
-//             } catch (err) {
-//                 setError(err.message);
-//             } finally {
-//                 setIsLoading(false);
-//             }
-//         }
-        
-//         loadData();
-//     }, []);
-    
-//     if (error) {
-//         return <p className="error-message">Помилка: {error}</p>;
-//     }
-    
-//     if (isLoading) {
-//         return <p className="loading">Завантаження подій...</p>;
-//     }
-    
-//     return (
-//         <>
-//             {events.map(event => (
-//                 <EventCard
-//                 key={event.id}
-//                 title={event.title}
-//                 category={event.category}
-//                 date={event.date}
-//                 />
-//             ))}
-//         </>
-//     );
-// }
-
-// Знаходження кореня і рендер
-// const root = ReactDOM.createRoot(document.getElementById('events-list'));
-// root.render(<App />);
-
-// === Кінець React частини ===
-
 /**
  * Модель даних події:
  * @typedef {Object} Event 
@@ -131,7 +20,7 @@ const API_URL = 'https://date.nager.at/api/v3/PublicHolidays/2026/UA';
 let events = [];
 
 // Список обраних подій
-// const savedEvents = loadFromLocalStorage();
+let savedEvents;
 
 // === Рендер ===
 
@@ -163,7 +52,8 @@ function renderEvents(events) {
 
         // Додаємо класи картці
         card.classList.add('card');
-        card.dataset.category = event.category; 
+        card.dataset.category = event.category;
+        card.setAttribute('data-link', `/events/${event.id}`);
         if (event.category === "movie") {
             card.classList.add('movie');
         } else if (event.category === "concert") {
@@ -189,16 +79,14 @@ function renderEvents(events) {
             displayMonth = monthNames[dateObj.getMonth()];
             
             // Розраховуємо дні одразу тут, поки dateObj існує
-            const today = new Date();
-            const timeDiff = dateObj - today;
-            daysLeft = Math.abs(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) % 365);
+            daysLeft = calculateDaysLeft(event.date);
         }
         // Розраховуємо ширину смуги у відсотках
         let progressPercent = Math.min((daysLeft / 365) * 100, 100);
 
         let status = "?";
         if (savedEvents.some(saved => String(saved.id) === String(event.id))) {
-            status = "Вилучити з обраного";
+            status = "Вилучити";
         } else {
             status = "В обране";
         }
@@ -212,7 +100,7 @@ function renderEvents(events) {
                     <span class="day">${displayDay}</span>
                 </time>
                 <p class="badge">${categoryText}</p>
-                <button class="btn-fav" data-id="${event.id}">${status}</button>
+                <button class="btn-fav ${status === "Вилучити" ? "active" : ""}" data-id="${event.id}">${status}</button>
             </div>
             <div class="progress-bar">
                 <div class="progress-bar_fill" style="width: 0%;"></div>
@@ -242,9 +130,14 @@ function calculateDaysLeft(dateString) {
     
     const today = new Date();
     const dateObj = new Date(dateString);
-    const timeDiff = dateObj - today;
+    const daysLeft = Math.ceil((dateObj - today) / (1000 * 60 * 60 * 24));
     
-    return Math.abs(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) % 365);
+    if (daysLeft >= 0){
+        return daysLeft;
+    } else if (daysLeft < 0){
+        const yearDays = ((today.getFullYear() % 4 === 0 && today.getFullYear() % 100 !== 0) || (today.getFullYear() % 400 === 0) ? 366 : 365)
+        return (yearDays + (daysLeft % yearDays)) % yearDays;
+    }
 }
 
 // === В обране ===
@@ -254,36 +147,40 @@ listContainer.addEventListener('click', async (e) => {
     const button = e.target.closest('.btn-fav');
     if (!button) return;
 
-    // Отримуємо id події
-    const eventId = button.dataset.id; 
-    
-    // Шукаємо, чи є вже ця подія в масиві збережених за її ID
+    e.stopPropagation();
+
+    const eventId = button.dataset.id;
     const savedIndex = savedEvents.findIndex(item => String(item.id) === eventId);
-    
+
     if (savedIndex !== -1) {
         await deleteItem(eventId);
         savedEvents.splice(savedIndex, 1);
+
+        button.textContent = "В обране";
+        button.classList.remove('active');
     } else {
         const targetEvent = events.find(item => String(item.id) === eventId);
         if (targetEvent) {
             await addItem(targetEvent);
             savedEvents.push(targetEvent);
+
+            button.textContent = "Вилучити";
+            button.classList.add('active');
         }
     }
-    
-    renderEvents(events);
 });
 
-const allEventsButton = document.querySelector('#all-events-btn');
-const savedEventsButton = document.querySelector('#saved-event-btn');
+// allEventsButton.addEventListener('click', () => {
+//     savedEventsButton.classList.remove('active');
+//     allEventsButton.classList.add('active');
+//     renderEvents(events);
+// });
 
-allEventsButton.addEventListener('click', () => {
-    renderEvents(events);
-});
-
-savedEventsButton.addEventListener('click', () => {
-    renderEvents(savedEvents);
-});
+// savedEventsButton.addEventListener('click', () => {
+//     allEventsButton.classList.remove('active');
+//     savedEventsButton.classList.add('active');
+//     renderEvents(savedEvents);
+// });
 
 // === Форма ===
 
@@ -324,6 +221,7 @@ form.addEventListener('submit', async (event) => {
     
     // Додаємо подію в масив для відображення
     events.push(newEvent);
+    savedEvents.push(newEvent);
     renderEvents(events);
     form.reset();
 });
@@ -351,7 +249,7 @@ filterContainer.addEventListener('click', (event) => {
     } else {
         // Змінюємо поточний фільтр
         currentFilter = clickedCategory;
-
+        
         // Оновлюємо клас активності 
         const allButtons = filterContainer.querySelectorAll('button');
         allButtons.forEach(btn => btn.classList.remove('active'));
@@ -380,10 +278,10 @@ async function loadData() {
         events.length = 0; // Стираємо фіктивні дані з минулих практикумів
         
         // Парсинг даних
-        data.forEach(event => {
+        data.forEach((event, index) => {
             // Створюємо подію
             const newEvent = {
-                id: crypto.randomUUID(), 
+                id: `${event.date}-${index}`, 
                 date: event.date,
                 title: event.localName,
                 countryCode: event.countryCode, 
@@ -393,9 +291,13 @@ async function loadData() {
             events.push(newEvent); 
         });
 
-        // Витягуємо дані з бази даних
+        // Додаємо з БД у загальний список лише ті події, яких немає в API
         const dbEvents = await getAllItems(); 
-        events.push(...dbEvents);
+        dbEvents.forEach(dbEvent => {
+            if (!events.some(e => String(e.id) === String(dbEvent.id))) {
+                events.push(dbEvent);
+            }
+        });
 
         // Заново рендеримо дані
         renderEvents(events);
@@ -498,6 +400,17 @@ function getAllItems() {
     });
 }
 
+function getItem(id) {
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(['savedEvents'], 'readonly');
+        const store = transaction.objectStore('savedEvents');
+        const request = store.get(id);
+
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = (event) => reject(event.target.error);
+    });
+}
+
 function addItem(item) {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(['savedEvents'], 'readwrite');
@@ -559,8 +472,144 @@ async function migrateFromLocalStorage() {
     }
 }
 
-let savedEvents;
+// === Клієнтська маршрутизація ===
+// Вибираємо деталі
+const detailsContainer = document.querySelector('#detail-information');
+const allEventsButton = document.querySelector('#all-events-btn');
+const savedEventsButton = document.querySelector('#saved-event-btn');
 
+// Масив маршрутів
+const routes = [
+    { 
+        path: '/', 
+        view: renderHomeView 
+    },
+    { 
+        path: '/saved', 
+        view: renderSavedView 
+    },
+    { 
+        path: '/events/:id', 
+        view: renderEventDetailView 
+    }
+];
+
+// Головна сторінка
+function renderHomeView() {
+    savedEventsButton.classList.remove('active');
+    allEventsButton.classList.add('active');
+    renderEvents(events);
+}
+
+// Сторінка збережених: список подій з обраного
+function renderSavedView() {
+    allEventsButton.classList.remove('active');
+    savedEventsButton.classList.add('active');
+    renderEvents(savedEvents);
+}
+
+// Сторінка деталей
+async function renderEventDetailView(params) {
+    const eventId = params.id;
+
+    let targetEvent = await getItem(eventId);
+
+    if (!targetEvent) {
+        targetEvent = events.find(item => String(item.id) === String(eventId));
+    }
+
+    if (!targetEvent) {
+        render404View();
+        return;
+    }
+
+    detailsContainer.innerHTML = `
+        <h3>Деталі</h3>
+        <p>Назва: ${targetEvent.title}</p>
+        <p>Дата: ${targetEvent.date}</p>
+        <p>Категорія: ${targetEvent.category === 'other' ? 'Інше' : targetEvent.category}</p>
+        <p>Країна: ${targetEvent.countryCode}</p>
+        <p>Опис: Детальний опис події «${targetEvent.title}»...</p>
+    `;
+}
+
+// Функція для обробки неіснуючих маршрутів
+function render404View() {
+    listContainer.innerHTML = `
+        <div class="not-found">
+            <h2>404 — Сторінку не знайдено</h2>
+            <p>Такої сторінки або події не існує.</p>
+            <a href="/" data-link>Повернутися на головну</a>
+        </div>
+    `;
+
+    detailsContainer.innerHTML = `
+    <h3>Деталі</h3>
+    `;
+}
+
+// Функція вибору маршруту
+function matchRoute(path) {
+    const pathParts = path.split('/').filter(Boolean);
+
+    for (const route of routes) {
+        const routeParts = route.path.split('/').filter(Boolean);
+
+        if (routeParts.length !== pathParts.length) continue;
+
+        const params = {};
+
+        const isMatch = routeParts.every((part, i) => {
+            if (part.startsWith(':')) {
+                const paramName = part.slice(1);
+                params[paramName] = pathParts[i];
+                return true;
+            }
+            return part === pathParts[i];
+        });
+
+        if (isMatch) {
+            return { view: route.view, params };
+        }
+    }
+
+    return null;
+}
+
+// Головна функція роутера
+function router() {
+    const path = location.pathname;
+    const match = matchRoute(path);
+
+    if (match) {
+        match.view(match.params);
+    } else {
+        render404View();
+    }
+}
+
+// Функція для ручної зміни URL та виклику роутера
+function navigate(path) {
+    history.pushState(null, '', path);
+    router();
+}
+
+// Перехоплювач кліків по посиланнях
+document.addEventListener('click', (event) => {
+    const link = event.target.closest('[data-link]');
+    if (!link) return;
+
+    event.preventDefault();
+    const href = link.getAttribute('href') || link.getAttribute('data-link'); 
+    navigate(href);
+});
+
+// Обробка системних кнопок браузера "Назад" і "Вперед"
+window.addEventListener('popstate', () => {
+    router();
+});
+
+// === Запуск ===
 async function initApp() {
     try {
         await openDB();
@@ -570,6 +619,8 @@ async function initApp() {
         savedEvents = await getAllItems();
 
         await loadData();
+
+        router();
     } catch (err) {
         console.error('Помилка ініціалізації додатку:', err);
     }

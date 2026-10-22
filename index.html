@@ -18,49 +18,15 @@
     <header>
         <h1>Афіша подій міста</h1>
         <nav>
-            <button class="all_events" id="all-events-btn">Події</button>
-            <button class="current_event" id="saved-event-btn">Обрана подія</button>
+            <a href="/" class="all_events active" id="all-events-btn" data-link>Події</a>
+            <a href="/saved" class="current_event" id="saved-event-btn" data-link>Обрана подія</a>
         </nav>
     </header>
     
-    <section class="double_display">
+    <section class="main-information">
+        <aside class="filter">
+            <img src="assets/filter_alt_24dp_FFC145_FILL0_wght400_GRAD0_opsz24.svg" alt="Фільтр">
         
-        <main>
-            <section class="underheader">
-                <img src="assets/filter_alt_24dp_FFC145_FILL0_wght400_GRAD0_opsz24.svg" alt="Фільтр">
-                <h2>Події</h2>
-            </section>
-            <form id="event-form">
-                <label for="event-title">Назва події:</label>
-                <input 
-                type="text" 
-                id="event-title" 
-                name="title" 
-                pattern=".{3,}" 
-                required
-                >
-                
-                <label for="event-category">Категорія:</label>
-                <select id="event-category" name="category" required>
-                    <option value="other">Оберіть категорію</option>
-                    <option value="movie">Кіно</option>
-                    <option value="concert">Концерт</option>
-                    <option value="standup">Стендап</option>
-                    <option value="show">Шоу</option>
-                </select>
-                
-                <label for="event-date">Дата події:</label>
-                <input 
-                type="date" 
-                id="event-date" 
-                name="date" 
-                required
-                >
-                
-                <button type="submit">Додати подію</button>
-            </form>
-        <section class="filter-and-cards">
-            
             <div class="filter-buttons" id="filter-buttons">
                 <button type="button" data-category="movie">Кіно</button>
                 <button type="button" data-category="concert">Концерт</button>
@@ -68,7 +34,44 @@
                 <button type="button" data-category="show">Шоу</button>
                 <button type="button" data-category="other">Інше</button>
             </div>
+        </aside>
+    
+        <main>
+            <section class="underheader">
+                <h2>Події</h2>
             
+                <form id="event-form">
+                    <label for="event-title"><!-- Назва події: --></label>
+                    <input 
+                    type="text" 
+                    id="event-title" 
+                    name="title" 
+                    pattern=".{3,}" 
+                    required
+                    placeholder="Назва події"
+                    >
+                    
+                    <label for="event-category"><!-- Категорія: --></label>
+                    <select id="event-category" name="category" required>
+                        <option value="other">Оберіть категорію</option>
+                        <option value="movie">Кіно</option>
+                        <option value="concert">Концерт</option>
+                        <option value="standup">Стендап</option>
+                        <option value="show">Шоу</option>
+                    </select>
+                    
+                    <label for="event-date"><!-- Дата події:--></label>
+                    <input 
+                    type="date" 
+                    id="event-date" 
+                    name="date" 
+                    required
+                    >
+                    
+                    <button type="submit">Додати подію</button>
+                </form>
+            </section>
+        
             <section class="cards" id="events-list">
                 <!-- <article class="card">
                     <img src="assets/img/The Odyssey.webp" alt="Одіссея">
@@ -82,32 +85,23 @@
                     </div>
                 </article> -->
             </section>
-            
-        </section>
-    </main>
+        </main>
     
-    <aside>
-        <h3>Деталі</h3>
-        <p>Дата: </p>
-        <p>Місце: </p>
-        <p>Час: </p>
-        <p>Опис: Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eligendi commodi quasi voluptatum quibusdam, necessitatibus repudiandae enim dignissimos quae fugiat nobis ea illum, perspiciatis, reprehenderit ratione magnam expedita a possimus?</p>
-    </aside>
+        <aside class="details" id="detail-information">
+            <h3>Деталі</h3>
+            <!-- <p>Дата: </p>
+            <p>Місце: </p>
+            <p>Час: </p>
+            <p>Опис: Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eligendi commodi quasi voluptatum quibusdam, necessitatibus repudiandae enim dignissimos quae fugiat nobis ea illum, perspiciatis, reprehenderit ratione magnam expedita a possimus?</p> -->
+        </aside>
     
-</section>
+    </section>
 
-<footer>
-    <p id="events-count">Кількість подій: 0</p>
-    <h2>Контакти організаторів</h2>
-    <p>Номер телефону:</p>
-    <p>Пошта:</p>
-</footer>
-
-<!-- React 18 + Babel standalone для JSX прямо в браузері -->
-<!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
-
-<script type="text/babel" src="js/app.js"></script>
+    <footer>
+        <p id="events-count">Кількість подій: 0</p>
+        <h2>Контакти організаторів</h2>
+        <p>Номер телефону:</p>
+        <p>Пошта:</p>
+    </footer>
 </body>
 </html>
