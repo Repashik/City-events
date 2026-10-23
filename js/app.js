@@ -24,6 +24,12 @@ let savedEvents;
 
 // === Рендер ===
 
+// Функція екранування
+function escapeHtml(str) {
+ const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+ return String(str).replace(/[&<>"']/g, (ch) => map[ch]);
+}
+
 // Вибираємо список карт
 const listContainer = document.querySelector('#events-list');
 // Функція рендеру
@@ -93,7 +99,7 @@ function renderEvents(events) {
 
         // Підставляємо нові змінні у відповідні теги span
         card.innerHTML = `
-            <h3>${event.title}</h3>
+            <h3>${escapeHtml(event.title)}</h3>
             <div class="badges">
                 <time class="date" datetime="${event.date}">
                     <span class="month">${displayMonth}</span>
@@ -528,11 +534,11 @@ async function renderEventDetailView(params) {
 
     detailsContainer.innerHTML = `
         <h3>Деталі</h3>
-        <p>Назва: ${targetEvent.title}</p>
+        <p>Назва: ${escapeHtml(targetEvent.title)}</p>
         <p>Дата: ${targetEvent.date}</p>
         <p>Категорія: ${targetEvent.category === 'other' ? 'Інше' : targetEvent.category}</p>
         <p>Країна: ${targetEvent.countryCode}</p>
-        <p>Опис: Детальний опис події «${targetEvent.title}»...</p>
+        <p>Опис: Детальний опис події «${escapeHtml(targetEvent.title)}»...</p>
     `;
 }
 

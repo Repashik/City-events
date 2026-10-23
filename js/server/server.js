@@ -68,6 +68,9 @@ app.use((req, res) => {
 });
 
 // Запуск сервера
-app.listen(PORT, () => {
-    console.log(`Сервер успішно запущено на http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Сервер успішно запущено на http://localhost:${PORT}`);
+// });
+
+// Vercel
+module.exports = app;
