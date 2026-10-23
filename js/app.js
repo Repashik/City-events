@@ -335,6 +335,8 @@ async function loadData() {
         // Оновлюємо лічильник 
         const pContainer = document.querySelector('#events-count');
         pContainer.textContent = 'Кількість подій: 0';
+
+        throw error;
     } finally {
         // Видаляємо знак завантаження 
         const loadingElement = listContainer.querySelector('.loading');

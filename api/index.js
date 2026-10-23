@@ -2,7 +2,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-app.use(express.static(path.join(__dirname, '../../')));
+app.use(express.static(path.join(__dirname, '../')));
 const PORT = 3000;
 
 // Локальні дані
@@ -64,7 +64,7 @@ app.get('/api/events/:id', (req, res) => {
 });
 
 app.use((req, res) => {
-    res.sendFile(path.join(__dirname, '../../index.html'));
+    res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 // Запуск сервера
