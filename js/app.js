@@ -4,7 +4,7 @@
 console.log('script.js підключено');
 
 // Адреса, з якої ми беремо дані
-const API_URL = 'http://localhost:3000/api/events';
+const API_URL = '/api/events';
 
 /**
  * Модель даних події:
