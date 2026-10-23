@@ -1,9 +1,9 @@
 // Підключаємо Express
-const express = require('express');
-const path = require('path');
-const app = express();
-app.use(express.static(path.join(__dirname, '../')));
-const PORT = 3000;
+const express = require('express'); // Підключаємо фреймворк Express
+const path = require('path'); // Підключаємо вбудований у Node.js модуль path
+const app = express(); // Об'єкт серверного застосунку
+app.use(express.static(path.join(__dirname, '../'))); // Автоматична роздача статичних файлів
+const PORT = 3000; // Порт (не використовується в деплої)
 
 // Локальні дані
 const events = [

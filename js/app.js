@@ -561,15 +561,19 @@ function render404View() {
 
 // Функція вибору маршруту
 function matchRoute(path) {
+    // Ділимо адресу на елементи
     const pathParts = path.split('/').filter(Boolean);
-
+    
     for (const route of routes) {
+        // Ділимо маршрути на елементи
         const routeParts = route.path.split('/').filter(Boolean);
 
+        // Якщо не збігаються -> наступна ітерація
         if (routeParts.length !== pathParts.length) continue;
 
         const params = {};
 
+        // Перевірка шаблону для /events/:id
         const isMatch = routeParts.every((part, i) => {
             if (part.startsWith(':')) {
                 const paramName = part.slice(1);
@@ -580,21 +584,28 @@ function matchRoute(path) {
         });
 
         if (isMatch) {
+            // Повертаємо маршрут
             return { view: route.view, params };
         }
     }
-
+    
+    // Повертаємо помилку 404
     return null;
 }
 
 // Головна функція роутера
 function router() {
+    // Беремо поточну адресу
     const path = location.pathname;
+    // Отримуємо дані
     const match = matchRoute(path);
 
+    // Якщо дані існують
     if (match) {
+        // відмальовуємо потрібну функцію
         match.view(match.params);
     } else {
+        // відмальовуємо помилку 404
         render404View();
     }
 }
